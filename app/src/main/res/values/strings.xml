@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PokemonGame</string>
+    <string name="your_card">Your Card</string>
+    <string name="opponents_card">Opponents Card</string>
+</resources>
