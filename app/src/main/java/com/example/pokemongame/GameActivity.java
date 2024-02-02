@@ -56,6 +56,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         result.setText("");
+
         // skifter knappen efter første tryk
         if (!gameStarted) {
             startButton.setVisibility(View.GONE);
@@ -65,6 +66,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             gameStarted = true;
         }
 
+
+        // loop køres så længe spillere stadig har kort
         if (turn != players.get(0).cards.size()) {
 
             // p1 card
@@ -73,11 +76,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             // p2 card
             getCard(players.get(1).cards.get(turn).id, players.get(1));
 
+            // Integer fordi hp kan være null
             Integer p1 = players.get(0).cards.get(turn).hp;
             Integer p2 = players.get(1).cards.get(turn).hp;
 
 
-            // statements til at vælge hvem der vinder runden
+            // statements til at vælge hvem der vinder runden og får point
             if (p1 > p2) {
                 result.setText("YOU WIN");
                 players.get(0).Score += 1;
@@ -91,7 +95,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
             Toast.makeText(this, "Round: " + (turn + 1), Toast.LENGTH_LONG).show();
             turn++;
-        } else {
+
+        } else { // efter sidste runde ses resultatet
             if (players.get(0).Score > players.get(1).Score) {
                 result.setText("WINNER IS \n\n Player One \n WITH " + players.get(0).Score + " POINTS");
             } else if (players.get(0).Score < players.get(1).Score) {
@@ -105,22 +110,24 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void getCard(String id, Player player) {
+    public void getCard(String id, Player player) { // unødvendigt ????
         String url = "https://api.tcgdex.net/v2/en/cards/" + id;
-
         StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
             card = new Gson().fromJson(response, Card.class);
-            getImage(player);
+            getImage(player); // eneste vigtige ???
         }, error -> Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
         );
         requestQueue.add(request);
     }
 
     private void getImage(Player player) {
+
+        // viser spiller 1 kort
         if (players.get(0) == player) {
             ImageView cardImage = findViewById(R.id.img_playerCard);
             Picasso.get().load(card.image + "/high.jpg").into(cardImage);
         }
+        // viser spiller 2 kort
         if (players.get(1) == player) {
             ImageView cardImage = findViewById(R.id.img_opponentCard);
             Picasso.get().load(card.image + "/high.jpg").into(cardImage);

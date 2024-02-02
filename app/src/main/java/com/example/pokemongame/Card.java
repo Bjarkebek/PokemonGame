@@ -3,6 +3,7 @@ package com.example.pokemongame;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// klasse til hvert enkelt spillerkort (til kortinfo)
 public class Card implements Serializable {
     public String category;
     public String id;

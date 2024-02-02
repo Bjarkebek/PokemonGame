@@ -15,25 +15,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Vælger hvor mange kort der skal spilles med
         NumberPicker cardsPicker = findViewById(R.id.np_cards);
         cardsPicker.setMinValue(3);
         cardsPicker.setMaxValue(20);
         cardsPicker.setValue(5);
 
-//        NumberPicker playersPicker = findViewById(R.id.np_players);
-//        playersPicker.setMinValue(2);
-//        playersPicker.setMaxValue(4);
-//        playersPicker.setValue(2);
 
-        GameSetup gameSetup = new GameSetup(this);
+        GameSetup gameSetup = new GameSetup(this); // laver ny instans af gamesetup
 
         Button startButton = findViewById(R.id.btn_start);
         startButton.setOnClickListener(view -> {
             startButton.setText("Loading");
             startButton.setEnabled(false);
-            gameSetup.numPlayers = 2;
-            gameSetup.numCards = cardsPicker.getValue();
-            gameSetup.start();
+            gameSetup.numPlayers = 2; // sætter spillere fast til 2
+            gameSetup.numCards = cardsPicker.getValue(); // tager value fra det valgte antal kort
+            gameSetup.start(); // kører setup i GameSetup.java
         });
     }
 }

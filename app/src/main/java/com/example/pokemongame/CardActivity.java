@@ -19,6 +19,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+
+// !!!!!!!!!!!!!!!!!
+// bliver ikke brugt
+// !!!!!!!!!!!!!!!!!
+
+
 public class CardActivity extends AppCompatActivity {
     public static RequestQueue requestQueue;
     static Card card;
