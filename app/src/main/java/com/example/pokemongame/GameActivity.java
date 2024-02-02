@@ -70,23 +70,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         // loop køres så længe spillere stadig har kort
         if (turn != players.get(0).cards.size()) {
 
-            // p1 card
+            // player 1 card
             getCard(players.get(0).cards.get(turn).id, players.get(0));
 
-            // p2 card
+            // player 2 card
             getCard(players.get(1).cards.get(turn).id, players.get(1));
 
-            // Integer fordi hp kan være null
+            // Finder hp for kortet og sætter ind i Integer (da hp kan være null)
             Integer p1 = players.get(0).cards.get(turn).hp;
             Integer p2 = players.get(1).cards.get(turn).hp;
 
 
             // statements til at vælge hvem der vinder runden og får point
             if (p1 > p2) {
-                result.setText("YOU WIN");
+                result.setText("P1 WIN");
                 players.get(0).Score += 1;
             } else if (p1 < p2) {
-                result.setText("YOU LOSE");
+                result.setText("P2 WIN");
                 players.get(1).Score += 1;
             } else {
                 result.setText("DRAW");
